@@ -1,0 +1,81 @@
+
+-- USER TABLE
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) DEFAULT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    role VARCHAR(50),
+    phone VARCHAR(50),
+    profilePicture VARCHAR(255),
+    isOnline BOOLEAN,
+    loginVerificationCode VARCHAR(255),
+    loginVerificationCodeExpires TIMESTAMP,
+    googleId VARCHAR(255),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- ORGANISATION TABLE
+CREATE TABLE Organisations (
+    id SERIAL PRIMARY KEY,
+    owner_id INT REFERENCES Users(id),
+    name VARCHAR(255),
+    joinLink VARCHAR(255),
+    url VARCHAR(255),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- CHANNEL TABLE
+CREATE TABLE Channels (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) DEFAULT 'This is the beginning of the channel',
+    description TEXT,
+    organisation_id INT REFERENCES Organisations(id),
+    isChannel BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- CONVERSATION TABLE
+CREATE TABLE Conversations (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) DEFAULT NULL,
+    description TEXT,
+    isSelf BOOLEAN DEFAULT FALSE,
+    organisation_id INT REFERENCES Organisations(id),
+    createdBy_id INT REFERENCES Users(id),
+    isConversation BOOLEAN DEFAULT TRUE,
+    isOnline BOOLEAN DEFAULT FALSE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- MESSAGE TABLE
+CREATE TABLE Messages (
+    id SERIAL PRIMARY KEY,
+    sender_id INT REFERENCES Users(id),
+    content TEXT,
+    channel_id INT REFERENCES Channels(id),
+    organisation_id INT REFERENCES Organisations(id),
+    conversation_id INT REFERENCES Conversations(id),
+    isBookmarked BOOLEAN DEFAULT FALSE,
+    isSelf BOOLEAN DEFAULT FALSE,
+    hasRead BOOLEAN DEFAULT FALSE,
+    type VARCHAR(50),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- THREAD TABLE
+CREATE TABLE Threads (
+    id SERIAL PRIMARY KEY,
+    sender_id INT REFERENCES Users(id),
+    content TEXT,
+    message_id INT REFERENCES Messages(id),
+    isBookmarked BOOLEAN DEFAULT FALSE,
+    hasRead BOOLEAN DEFAULT FALSE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
