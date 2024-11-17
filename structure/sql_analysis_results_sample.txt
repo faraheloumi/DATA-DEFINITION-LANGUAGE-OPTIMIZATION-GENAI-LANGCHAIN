@@ -1,0 +1,103 @@
+=== Individual Query Analysis ===
+Tables involved: Threads, Users, Reactions, Users
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: t.message_id =?;
+
+Tables involved: Users
+Operation type: INSERT
+JOIN conditions: None
+WHERE conditions: None
+
+Tables involved: Users
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: email =?
+
+Tables involved: Users
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: loginVerificationCode = SHA2(?, 256) AND loginVerificationCodeExpires > NOW()
+
+Tables involved: Users
+Operation type: UPDATE
+JOIN conditions: None
+WHERE conditions: WHERE email =?;
+
+Tables involved: Users
+Operation type: INSERT
+JOIN conditions: None
+WHERE conditions: None
+
+Tables involved: Channels
+Operation type: INSERT
+JOIN conditions: None
+WHERE conditions: None
+
+Tables involved: Channels
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: organisationId =?
+
+Tables involved: - Channels
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: WHERE id =?
+
+Tables involved: Channels
+Operation type: UPDATE
+JOIN conditions: None
+WHERE conditions: id =?
+
+Tables involved: Conversations
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: organisationId =?
+
+Tables involved: Conversation (c), User (u)
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: c.id =?
+
+Tables involved: - Messages
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: - channelId =?
+
+Tables involved: - Messages
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: organisationId =? 
+  AND conversationId =?
+  AND (isSelf =? OR? IS NULL)
+
+Tables involved: - Users
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: - m.id =?
+
+Tables involved: Organisations, Users, Channels, Conversations
+Operation type: SELECT
+JOIN conditions: None
+WHERE conditions: None
+
+Tables involved: `Conversations`, `Users`
+Operation type: `SELECT`
+JOIN conditions: `None`
+WHERE conditions: `c.organisationId =?`
+
+Tables involved: Organisations
+Operation type: INSERT
+JOIN conditions: None
+WHERE conditions: None
+
+========================================
+=== Global Analysis ===
+Repeated access patterns: • The `Users` table is accessed multiple times, particularly in `INSERT`, `SELECT`, and `UPDATE` operations. This could be due to inefficient data modeling or frequent changes to the user data.
+  • The `Messages` table is accessed multiple times, especially in `SELECT` operations with various conditions. This might indicate a need for a more efficient data structure or indexing strategy.
+JOIN optimization: • There are no explicit JOINs in the provided operations, but implicit JOINs through subqueries or correlated subqueries could be optimized by rephrasing the queries to use explicit JOINs.
+WHERE condition improvements: • Many `WHERE` conditions use functions like `SHA2` or `NOW()`, which might not be optimized for performance. Consider indexing these columns or rephrasing the conditions to avoid using these functions.
+  • Some conditions use `=?` with a single value, which might be optimized by using a more efficient query syntax or indexing the column.
+Suggested indexes: • Indexes on `Users` email and loginVerificationCode columns could improve performance in `SELECT` operations with these conditions.
+  • Indexes on `Messages` columns like `channelId`, `organisationId`, and `conversationId` might improve performance in `SELECT` operations with these conditions.
+  • Indexes on `Conversations` columns like `organisationId` and `id` could improve performance in `SELECT` operations with these conditions.

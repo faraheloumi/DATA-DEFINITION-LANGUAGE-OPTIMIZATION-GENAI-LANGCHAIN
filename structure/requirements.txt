@@ -1,0 +1,5 @@
+sqlparse
+transformers
+torch
+langchain-core
+langchain-huggingface

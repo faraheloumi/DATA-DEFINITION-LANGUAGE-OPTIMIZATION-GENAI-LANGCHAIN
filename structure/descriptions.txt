@@ -1,0 +1,92 @@
+Tables Involved: - Threads
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: None
+
+Tables Involved: Users
+Operation Type: INSERT
+JOIN Conditions: None
+WHERE Conditions: None
+
+Tables Involved: Users
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: email =?
+
+Tables Involved: Users
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: loginVerificationCode = SHA2(?, 256) AND loginVerificationCodeExpires > NOW();
+
+Tables Involved: Users
+Operation Type: UPDATE
+JOIN Conditions: None
+WHERE Conditions: email =?
+
+Tables Involved: Users
+Operation Type: INSERT
+JOIN Conditions: None
+WHERE Conditions: None
+
+Tables Involved: - Channels
+Operation Type: INSERT
+JOIN Conditions: None
+WHERE Conditions: None
+
+Tables Involved: - Channels
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: WHERE organisationId =?
+
+Tables Involved: - Channels
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: id =?
+
+Tables Involved: - Channels
+Operation Type: UPDATE
+JOIN Conditions: None
+WHERE Conditions: WHERE id =?
+
+Tables Involved: Conversations
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: organisationId =?
+
+Tables Involved: - Conversations
+Operation Type: - SELECT
+JOIN Conditions: - None
+WHERE Conditions: - c.id =?
+
+Tables Involved: Messages
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: channelId =? 
+  AND organisationId =?
+
+Tables Involved: Messages
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: organisationId =? 
+  AND conversationId =?
+  AND (isSelf =? OR? IS NULL)
+
+Tables Involved: - Messages (m)
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: m.id =?
+
+Tables Involved: Organisations, Users, CoWorkers, Channels, Conversations
+Operation Type: SELECT
+JOIN Conditions: None
+WHERE Conditions: o.id =?;
+
+Tables Involved: - Conversations
+Operation Type: - SELECT
+JOIN Conditions: - None
+WHERE Conditions: - None
+
+Tables Involved: Organisations
+Operation Type: INSERT
+JOIN Conditions: None
+WHERE Conditions: None
