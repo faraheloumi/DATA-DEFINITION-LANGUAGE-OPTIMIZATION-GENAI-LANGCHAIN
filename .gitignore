@@ -17,5 +17,5 @@ env.bak/
 venv.bak/
 
 # Misc
-./descriptions.txt
-./sql_analysis_results_sample.txt
+descriptions.txt
+sql_analysis_results_sample.txt
