@@ -11,7 +11,7 @@
   - [Installation](#installation)
 - [🧑‍💻 Usage](#-usage)
   - [Example Workflow](#example-workflow)
-- [⚙️ Configuration](#%EF%B8%8F-configuratio)
+- [⚙️ Configuration](#%EF%B8%8F-configuration)
 - [🔮 Future Considerations](#-future-considerations)
 - [🤝 Contributing](#-contributing)
 - [👨‍💻 Project By](#project-by)
