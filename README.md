@@ -2,19 +2,19 @@
 
 ## Table of Contents
 
-- [📌 Project Overview](#📌-project-overview)
-- [📁 Directory Structure](#📁-directory-structure)
-- [🏗️ Project Architecture](#🏗️-project-architecture)
-- [📜 Prompts](#📜-prompts)
-- [🚀 Getting Started](#🚀-getting-started)
+- [📌 Project Overview](#-project-overview)
+- [📁 Directory Structure](#-directory-structure)
+- [🏗️ Project Architecture](#%EF%B8%8F-project-architecture)
+- [📜 Prompts](#-prompts)
+- [🚀 Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [🧑‍💻 Usage](#🧑‍💻-usage)
+- [🧑‍💻 Usage](#-usage)
   - [Example Workflow](#example-workflow)
-- [⚙️ Configuration](#⚙️-configuration)
-- [🔮 Future Considerations](#🔮-future-considerations)
-- [🤝 Contributing](#🤝-contributing)
-- [👨‍💻 Project By](#👨‍💻-project-by)
+- [⚙️ Configuration](#%EF%B8%8F-configuratio)
+- [🔮 Future Considerations](#-future-considerations)
+- [🤝 Contributing](#-contributing)
+- [👨‍💻 Project By](#project-by)
 
 ## 📌 Project Overview  
 
