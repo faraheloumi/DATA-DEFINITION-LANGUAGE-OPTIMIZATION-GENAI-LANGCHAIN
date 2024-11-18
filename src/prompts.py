@@ -36,3 +36,14 @@ def get_pattern_analysis_prompt():
     "- **Suggested indexes**: Suggest any indexes that could improve performance.\n"
     )
     return PromptTemplate.from_template(template)
+
+def get_optimized_ddl_prompt():
+    optimization_template = (
+    "Optimize the following DDL query based on the provided SQL context. "
+    "Focus on indexing, foreign key constraints, and data type optimization. "
+    "Ensure to maintain the necessary relationships between tables.\n\n"
+    "Context:\n{context}\n\n"
+    "DDL Query:\n{sql_statement}\n\n"
+    "Optimized DDL:\n"
+    )
+    return PromptTemplate.from_template(optimization_template)
