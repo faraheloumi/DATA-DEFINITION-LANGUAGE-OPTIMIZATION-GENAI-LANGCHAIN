@@ -27,13 +27,13 @@ In modern software development and data management environments, process efficie
   - AI-powered validation system to assess the impact of proposed optimizations.
   - Ensures that all changes maintain or enhance overall system functionality without introducing regressions.
 
-- **⚙️ Automated DDL Optimization**:
-  - Leverages Large Language Models (LLMs) to refine DDL statements based on global analysis insights.
-  - Provides targeted optimizations like column type adjustments, constraint updates, and key usage improvements.
-
 - **🔍 Comprehensive SQL Analysis**:
   - Extracts patterns from raw SQL statements to identify inefficiencies and optimization opportunities.
   - Generates a global analysis report to inform downstream optimization processes.
+
+- **⚙️ Automated DDL Optimization**:
+  - Leverages Large Language Models (LLMs) to refine DDL statements based on global analysis insights.
+  - Provides targeted optimizations like column type adjustments, constraint updates, and key usage improvements.
 
 - **🧬 System Must Function with Small LLMs**:
   - Implements measures and deterministic functions that validate every step of the way to make for inaccuracy.
@@ -147,7 +147,7 @@ JOIN Conditions: - **None**
 WHERE Conditions: - **c.id =?**
 """
 ```
-## Prompts
+## 📜 Prompts
 We use the following prompts optimized to work best with the default models. Should you chose to upgrade, it shouldn't be a problem. However, a model of similar size may require some tweaking to adapt the prompts to it.
 ### Individual Description Prompt
 ```python
@@ -277,6 +277,20 @@ SQL_FILE_PATH = './data/usecase.sql' ## We extract SQL statements out of a file 
 ```
 > [!NOTE]
 > You can easily try out different models by changing these. The initialization templates reside in ```./src/llm.py``` if you'd like to have more customization options
+
+## 🔮 Futur Considerations
+1. **Expansion of Context Components:**
+Currently, the system focuses on operations performed on the database (e.g., insert-intensive, fetch-intensive tasks). However, expanding the context to include query logs could significantly enhance optimization capabilities.
+By analyzing query logs, we can determine which queries are most frequently sent to the database and their execution frequency. This would provide deeper insights into which columns and tables require indexing or other optimizations, leading to a more targeted performance boost.
+2. **Scaling Up with Larger LLMs:**
+Due to hardware limitations, the project currently relies on smaller LLMs like Llama-3.2-3B and StarCoder2-3B. While effective, these models may miss deeper optimization opportunities.
+Future iterations plan to leverage larger models, such as GPT-4o, to enhance the accuracy and depth of SQL analysis and DDL optimizations. This would provide richer insights and potentially unlock more advanced optimizations.
+3. **Adding Testing Functionalities:**
+We aim to implement comprehensive testing functionalities using tools like pylint for code quality checks and pytest for automated testing.
+This will ensure robustness and consistency of the optimization pipeline, helping catch errors early and streamlining the development process.
+4. **Measuring Optimization Effectiveness:**
+A critical addition to the pipeline would be a way to measure the actual performance improvements from the LLM-driven optimizations.
+This could include running optimized queries in a controlled environment and benchmarking them against the original queries to confirm both correctness and performance gains. By automating this validation process, we can better quantify the impact of our optimizations.
 
 ## 🤝 Contributing
 We welcome contributions to enhance this project! Here's how you can get involved:
