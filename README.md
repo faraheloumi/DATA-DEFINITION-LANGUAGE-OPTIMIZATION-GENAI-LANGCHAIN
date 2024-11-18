@@ -12,6 +12,7 @@
 - [Usage](#usage)
   - [Example Workflow](#example-workflow)
 - [Configuration](#configuration)
+- [Future Considerations](#future-considerations)
 - [Contributing](#contributing)
 - [Project By](#project-by)
 
