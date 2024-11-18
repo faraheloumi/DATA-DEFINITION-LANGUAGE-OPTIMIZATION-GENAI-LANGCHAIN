@@ -221,7 +221,7 @@ MODEL_ID=your-llm-model-id
 OPENAI_API_KEY=your-openai-key
 ```
 > [!NOTE]
-> The dashboard is automatically imported to your local Kibana Image during its build.Note that this step only applies if you would like to change the LLMs you use for this project. We use HF's transformers so we do not have this. 
+> Note that this step only applies if you would like to change the LLMs you use for this project. We use HF's transformers so we do not have this. 
 
 ## 🧑‍💻 Usage
 ### Running the Pipeline
