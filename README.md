@@ -232,11 +232,11 @@ To run the complete DDL optimization pipeline:
 python main.py
 ```
 ### Example Workflow
-1- Prepare your SQL queries:
+1. Prepare your SQL queries:
 - Store them in a list, e.g., ddl_queries = ["CREATE TABLE ...", "ALTER TABLE ..."].
-2- Generate Global Analysis:
+2. Generate Global Analysis:
 - Use the sql_analyzer module to perform the analysis.
-3- Optimize DDL Statements:
+3. Optimize DDL Statements:
 - The ddl_optimizer module optimizes the DDL statements based on the global analysis.
 ### Sample Code Snippet
 ```python
