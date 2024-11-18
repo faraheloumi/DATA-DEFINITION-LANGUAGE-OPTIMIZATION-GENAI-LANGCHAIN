@@ -2,21 +2,21 @@
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Directory Structure](#directory-structure)
-- [Project Architecture](#project-architecture)
-- [Prompts](prompts)
-- [Getting Started](#getting-started)
+- [📌 Project Overview](#📌-project-overview)
+- [📁 Directory Structure](#📁-directory-structure)
+- [🏗️ Project Architecture](#🏗️-project-architecture)
+- [📜 Prompts](#📜-prompts)
+- [🚀 Getting Started](#🚀-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
+- [🧑‍💻 Usage](#🧑‍💻-usage)
   - [Example Workflow](#example-workflow)
-- [Configuration](#configuration)
-- [Future Considerations](#future-considerations)
-- [Contributing](#contributing)
-- [Project By](#project-by)
+- [⚙️ Configuration](#⚙️-configuration)
+- [🔮 Future Considerations](#🔮-future-considerations)
+- [🤝 Contributing](#🤝-contributing)
+- [👨‍💻 Project By](#👨‍💻-project-by)
 
-## 📌 Project Overview
+## 📌 Project Overview  
 
 ### 📚 Background:
 
@@ -279,7 +279,7 @@ SQL_FILE_PATH = './data/usecase.sql' ## We extract SQL statements out of a file 
 > [!NOTE]
 > You can easily try out different models by changing these. The initialization templates reside in ```./src/llm.py``` if you'd like to have more customization options
 
-## 🔮 Futur Considerations
+## 🔮 Future Considerations
 1. **Expansion of Context Components:**
 Currently, the system focuses on operations performed on the database (e.g., insert-intensive, fetch-intensive tasks). However, expanding the context to include query logs could significantly enhance optimization capabilities.
 By analyzing query logs, we can determine which queries are most frequently sent to the database and their execution frequency. This would provide deeper insights into which columns and tables require indexing or other optimizations, leading to a more targeted performance boost.
