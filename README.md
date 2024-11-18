@@ -51,9 +51,10 @@ project/
 │
 ├── main.py                   # Main script to run the pipeline
 ├── src/
-│   ├── ddl_optimizer.py      # Module for optimizing DDL statements using LLM
+│   ├── sql_analyzer.py       # Module for optimizing DDL statements using LLM
 │   ├── extractor.py          # Module for extracting SQL patterns and generating analysis
 │   ├── prompts.py            # Module for generating prompts for LLM models
+│   ├── llm.py                # Module for loading llms
 │
 ├── utils/
 │   ├── utils.py              # Utility functions used across modules
