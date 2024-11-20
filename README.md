@@ -20,6 +20,8 @@
 
 ### 📚 Background:
 
+This is a project by Edam Hamza & Farah Elloumi realized for their tutored project at EY in collaboration with the Higher School of Communications at Tunis (SUP'COM).
+
 In modern software development and data management environments, process efficiency and accuracy are crucial. Code testing and data structure optimization are often handled manually, which can lead to significant inconsistencies and inefficiencies. Integrating generative AI into these processes promises to radically transform the way companies approach the maintenance and evolution of their IT systems.
 
 ### 🌟 The project must include:
