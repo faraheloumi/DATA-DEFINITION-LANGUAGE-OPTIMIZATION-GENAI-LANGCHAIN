@@ -51,6 +51,7 @@ project/
 │
 ├── main.py                   # Main script to run the pipeline
 ├── src/
+│   ├── ddl_optimizer.py      # Module for loading llms
 │   ├── sql_analyzer.py       # Module for optimizing DDL statements using LLM
 │   ├── extractor.py          # Module for extracting SQL patterns and generating analysis
 │   ├── prompts.py            # Module for generating prompts for LLM models
@@ -192,6 +193,17 @@ template = (
 ```python
 ## TBD
 ```
+### Individual Description Prompt
+```python
+template = (
+    "Optimize the following DDL query based on the provided SQL context. "
+    "Focus on indexing, foreign key constraints, and data type optimization. "
+    "Ensure to maintain the necessary relationships between tables.\n\n"
+    "Context:\n{context}\n\n"
+    "DDL Query:\n{sql_statement}\n\n"
+    "Optimized DDL:\n"
+    )
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -241,19 +253,27 @@ python main.py
 - The ddl_optimizer module optimizes the DDL statements based on the global analysis.
 ### Sample Code Snippet
 ```python
-from src.extractors import extract_ddl_queries, extract_info_runnable
-from src.llm import create_llm_pipeline, create_instruct_pipeline
+from src.extractors import extract_ddl_queries, extract_info_runnable, extract_ddls, extract_sql_context, extract_optimized_ddl
+from src.llm import create_llm_pipeline, create_instruct_pipeline, create_llm_pipeline_starcoder
 from src.sql_analyzer import SQLAnalyzer
+from src.ddl_optimizer import DDLOptimizer
 from src import prompts
-from utils.utils import print_results, export_result_to_file
-from config.config import MODEL_ID, INSTRUCT_MODEL_ID, SQL_FILE_PATH
+from utils.utils import print_results, export_result_to_file, save_optimized_ddls
+from config.config import MODEL_ID, INSTRUCT_MODEL_ID, SQL_FILE_PATH, MODEL_NAME, DDL_FILE_PATH, SQL_CONTEXT_FILE_PATH, OUTPUT_FILE
 
 # Setup pipelines
 hf_pipeline = create_llm_pipeline(MODEL_ID)
 hf_instruct_pipeline = create_instruct_pipeline(INSTRUCT_MODEL_ID)
+hf_starcoder_pipeline = create_llm_pipeline_starcoder(MODEL_NAME)
 
 # Load SQL queries
 queries = extract_ddl_queries(SQL_FILE_PATH)
+
+# Load DDL queries
+ddl_queries = extract_ddls(DDL_FILE_PATH)
+
+#Load SQL context
+sql_context = extract_sql_context(SQL_CONTEXT_FILE_PATH)
 
 # Define extractors
 extractor = extract_info_runnable(sub_patterns=["Tables involved", "Operation type", "JOIN conditions", "WHERE conditions"])
@@ -262,11 +282,26 @@ global_extractor = extract_info_runnable(sub_patterns=["Repeated access patterns
 # Initialize Analyzer
 analyzer = SQLAnalyzer(hf_pipeline, hf_instruct_pipeline, extractor, global_extractor, prompts)
 
+# Initialize Optimizer
+optimized_ddls = DDLOptimizer(hf_pipeline, prompts)
+
 # Run full pipeline
 results = analyzer.invoke_full_pipeline(queries)
 
-# Print result
+# Correct DDL Errors
+corrected_ddls = [extract_optimized_ddl(ddl) for ddl in optimized_ddls]
+
+# Save DDL
+save_optimized_ddls(corrected_ddls, OUTPUT_FILE)
+
+# Print context result
 print_results(results, "SQL Analysis")
+
+# Print DDL result
+print("Le résultat est sauvegardé dans le fichier ddl_optimized.sql")
+
+# Export result to file
+export_result_to_file(results, "sql_analysis_results")
 ```
 ## ⚙️ Configuration
 ### Environment Variables
@@ -276,6 +311,9 @@ MODEL_ID = "meta-llama/Llama-3.2-3B" ## We use this model for individual operati
 INSTRUCT_MODEL_ID = "meta-llama/Llama-3.2-3B-instruct" ## We use this model for pattern detection
 DDL_MODEL_ID = "bigcode/starcoder2-3b" ## We use this model for DDL optimization
 SQL_FILE_PATH = './data/usecase.sql' ## We extract SQL statements out of a file and format them.
+DDL_FILE_PATH = "./data/ddl.sql" ## We extract DDL statements out of a file and format them.
+SQL_CONTEXT_FILE_PATH = "./sql_analysis_results_sample.txt" ## We extract SQL contexts out of a file and format them.
+OUTPUT_FILE = "./optimized_ddl.sql" ## We save the optimized DDL in this file.
 ```
 > [!NOTE]
 > You can easily try out different models by changing these. The initialization templates reside in ```./src/llm.py``` if you'd like to have more customization options
