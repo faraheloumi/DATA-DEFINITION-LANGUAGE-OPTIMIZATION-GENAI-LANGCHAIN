@@ -203,7 +203,7 @@ template = (
     "DDL Query:\n{sql_statement}\n\n"
     "Optimized DDL:\n"
     )
-
+```
 ## 🚀 Getting Started
 
 ### Prerequisites
