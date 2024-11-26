@@ -191,11 +191,7 @@ template = (
     "- **Suggested indexes**: Suggest any indexes that could improve performance.\n"
     )
 ```
-### Individual Description Prompt
-```python
-## TBD
-```
-### Individual Description Prompt
+### DDL Optimization Prompt
 ```python
 template = (
     "Optimize the following DDL query based on the provided SQL context. "
